@@ -5,15 +5,17 @@ import Link from 'next/link';
 import { watchShow, dropShow } from '../utils/data/watchlistData';
 import { deleteAnime } from '../utils/data/animeData';
 
-function AnimeCard({ animeObj, id, onUpdate }) {
+function AnimeCard({ animeObj, onUpdate }) {
   const deleteThisAnime = () => {
     if (window.confirm(`Banish ${animeObj.title} to the Shadow Realm?`)) {
       deleteAnime(animeObj?.id).then(() => onUpdate());
     }
   };
 
+  const payload = { anime_id: animeObj.id };
+
   const watchThisShow = () => {
-    watchShow(animeObj.id, id).then(() => onUpdate());
+    watchShow(animeObj.id, payload).then(() => onUpdate());
   };
 
   const dropThisShow = () => {
