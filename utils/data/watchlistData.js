@@ -39,9 +39,31 @@ const deleteWatchlist = (watchlist) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const watchShow = (id, anime) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/watchlist/${id}/watch`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ anime }),
+  })
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+const dropShow = (id, animeId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/watchlist/${id}/drop`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ animeId }),
+  })
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   getWatchlist,
   createWatchlist,
   updateWatchlist,
   deleteWatchlist,
+  watchShow,
+  dropShow,
 };

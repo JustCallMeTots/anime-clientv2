@@ -28,7 +28,7 @@ const createAnime = (anime) => new Promise((resolve, reject) => {
 
 const updateAnime = (anime, id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/anime/${id}`, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'content-type': 'application/json',
     },
