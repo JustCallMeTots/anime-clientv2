@@ -22,7 +22,7 @@ export default function ViewAnime() {
       >
         <h1>
           {animeDeets.title}
-          {animeDeets.recomended ? '' : '🥵'}
+          {animeDeets.recomended ? '🥵' : ''}
         </h1>
         <p>
           {animeDeets.description}
