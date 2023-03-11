@@ -7,6 +7,13 @@ const getWatcher = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleWatcher = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/watcher/${id}`)
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
 const createWatcher = (genre) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/watcher`, {
     method: 'POST',
@@ -41,6 +48,7 @@ const dropShow = (id, animeId) => new Promise((resolve, reject) => {
 
 export {
   getWatcher,
+  getSingleWatcher,
   createWatcher,
   watchShow,
   dropShow,
