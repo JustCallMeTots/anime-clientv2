@@ -2,22 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
-import { watchShow, dropShow } from '../utils/data/watchlistData';
+import { watchShow, dropShow } from '../utils/data/watcherData';
 import { deleteAnime } from '../utils/data/animeData';
 
-function AnimeCard({ animeObj, id, onUpdate }) {
+function AnimeCard({
+  animeObj, onUpdate, user, updateUser,
+}) {
   const deleteThisAnime = () => {
     if (window.confirm(`Banish ${animeObj.title} to the Shadow Realm?`)) {
       deleteAnime(animeObj?.id).then(() => onUpdate());
     }
   };
 
+  const payload = { anime_id: animeObj.id };
+
   const watchThisShow = () => {
-    watchShow(animeObj.id, id).then(() => onUpdate());
+    watchShow(user.id, payload).then(() => updateUser(user.uid));
   };
 
   const dropThisShow = () => {
-    dropShow(animeObj).then(() => onUpdate());
+    dropShow(user.id, payload).then(() => updateUser(user.uid));
   };
   return (
     <Card className="animeCard" style={{ width: '18rem', margin: '10px' }}>
@@ -57,8 +61,12 @@ AnimeCard.propTypes = {
     genre: PropTypes.string,
     recommended: PropTypes.bool,
   }).isRequired,
-  id: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    uid: PropTypes.string,
+  }).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
 };
 
 export default AnimeCard;
