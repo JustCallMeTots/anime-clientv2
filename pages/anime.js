@@ -30,7 +30,7 @@ function Anime() {
       <SearchBar anime={anime} setFilterAnime={setFilterAnime} />
       <div className="d-flex flex-wrap">
         {filterAnime?.map((show) => (
-          <AnimeCard user={user} updateUser={updateUser} key={show.id} animeObj={show} onUpdate={getAnime} />
+          <AnimeCard user={user} updateUser={updateUser} key={show.id} animeObj={show} onUpdate={getAllAnime} />
         ))}
       </div>
     </div>
